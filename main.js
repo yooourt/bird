@@ -8,6 +8,9 @@ const __main = () => {
     let images = {
         bg: 'img/bg_day.png',
         ground: 'img/ground.png',
+        bird_0: 'img/bird_s1.png',
+        bird_1: 'img/bird_s2.png',
+        bird_2: 'img/bird_s3.png',
     }
 
     mountCanvas()
