@@ -32,22 +32,13 @@ class Bird extends GuaAnimation {
         }
 
         if (this.rotation < 45) {
-            this.rotation += 4
+            this.rotation += 5
         }
     }
 
     draw() {
-        let context = this.game.context
-
-        let f = this.frame
-        let w2 = f.w / 2
-        let h2 = f.h / 2
-
-        context.save()
-        context.translate(f.x + w2, f.y + h2)
-        context.rotate(this.rotation * Math.PI / 180)
-        context.drawImage(f.image, -w2, -h2)
-        context.restore()
+        this.frame.rotation = this.rotation
+        this.frame.draw()
     }
 
     jump () {

@@ -4,6 +4,14 @@ const e = document.querySelector.bind(document)
 
 const es = document.querySelectorAll.bind(document)
 
+const randomInt = (min, max) => {
+    return Math.floor(Math.random() * (max - min)) + min
+}
+
+const last = (array) => {
+    return array[array.length - 1]
+}
+
 const isNil = (value) => {
     return [null, undefined].includes(value)
 }

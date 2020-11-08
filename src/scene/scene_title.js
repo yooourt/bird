@@ -8,6 +8,9 @@ class SceneTitle extends GuaScene {
         let bg = GuaImage.new(this.game, 'bg')
         this.addElement(bg)
 
+        let pipes = Pipes.new(this.game)
+        this.addElement(pipes)
+
         let g = Ground.new(this.game)
         this.addElement(g)
 
