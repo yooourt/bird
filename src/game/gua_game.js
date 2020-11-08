@@ -1,4 +1,4 @@
-class Game {
+class GuaGame {
     static instance(...args) {
         if (isNil(this.i)) {
             this.i = new this(...args)
@@ -18,7 +18,7 @@ class Game {
         this.keydowns = {}
         this.actions = {}
         this.images = {}
-        this.scene = Scene.new()
+        this.scene = GuaScene.new()
     }
 
     replaceScene(scene) {
@@ -47,7 +47,7 @@ class Game {
         })
     }
 
-    drawImg(img) {
+    drawImage(img) {
         this.context.drawImage(img.image, img.x, img.y)
     }
 

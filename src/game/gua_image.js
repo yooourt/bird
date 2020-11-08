@@ -1,4 +1,4 @@
-class Img extends New {
+class GuaImage extends New {
     constructor(game, name) {
         super()
         this.game = game
@@ -20,6 +20,6 @@ class Img extends New {
     }
 
     draw() {
-        this.game.drawImg(this)
+        this.game.drawImage(this)
     }
 }

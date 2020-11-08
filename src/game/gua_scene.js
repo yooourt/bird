@@ -1,4 +1,4 @@
-class Scene extends New {
+class GuaScene extends New {
     constructor(game) {
         super()
         this.game = game

@@ -1,11 +1,11 @@
-class SceneTitle extends Scene {
+class SceneTitle extends GuaScene {
   constructor(game) {
       super(game)
       this.initialize()
   }
 
   initialize() {
-    let bg = Img.new(this.game, 'bg')
+    let bg = GuaImage.new(this.game, 'bg')
     this.addElement(bg)
 
     for (let i = 0; i < 30; i += 1) {

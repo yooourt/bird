@@ -1,0 +1,3 @@
+class GuaAnimation extends New {
+
+}
