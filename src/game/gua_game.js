@@ -6,7 +6,7 @@ class GuaGame {
         return this.i
     }
 
-    constructor(fps, images, callback) {
+    constructor({ fps, images, callback, debugEnabled }) {
         let canvas = e('#game-canvas')
         let context = canvas.getContext('2d')
 
@@ -19,6 +19,7 @@ class GuaGame {
         this.actions = {}
         this.images = {}
         this.scene = GuaScene.new()
+        this.debugEnabled = debugEnabled
     }
 
     replaceScene(scene) {
@@ -74,7 +75,13 @@ class GuaGame {
 
             this.scene.draw()
 
-            setTimeout(loop, 1000 / (window.fps || this.fps))
+            let fps
+            if (this.debugEnabled) {
+                fps = configControl.fps.value
+            } else {
+                fps = this.fps
+            }
+            setTimeout(loop, 1000 / fps)
         }
 
         loop()

@@ -1,12 +1,60 @@
-const config = {
-}
-
-const enableDebugMode = (game, enable) => {
+const insertDebugControls = (enable) => {
     if (!enable) {
         return
     }
 
-    e('#id-input-fps').addEventListener('input', (event) => {
-        window.fps = Number(event.target.value)
-    })
+    const bindAll = function(sel, eventName, callback) {
+        let a = es(sel)
+
+        for (var i = 0; i < a.length; i += 1) {
+            var input = a[i]
+            input.addEventListener(eventName, function(event) {
+                callback(event)
+            })
+        }
+    }
+
+    const templateControl = function(key, item) {
+        let t = `
+            <div class="gua-controls">
+                <label>
+                    <input
+                        class="gua-auto-slider"
+                        type="range"
+                        min="${item.min}"
+                        max="${item.max}"
+                        value="${item.value}"
+                        data-value="configControl.${key}"
+                    />
+                    ${item._comment}:
+                    <span class="gua-label">${item.value}</span>
+                </label>
+            </div>
+        `
+        return t
+    }
+
+    const insertControls = function() {
+        let div = e('.gua-controls')
+        let keys = Object.keys(configControl)
+        for (let k of keys) {
+            let item = configControl[k]
+            let html = templateControl(k, item)
+            div.insertAdjacentHTML('beforeend', html)
+        }
+    }
+
+    const bindEvents = function() {
+        bindAll('.gua-auto-slider', 'input', function(event) {
+            let target = event.target
+            let bindVar = target.dataset.value
+            let v = target.value
+            eval(bindVar + '.value=' + v)
+            let label = target.closest('label').querySelector('.gua-label')
+            label.innerText = v
+        })
+    }
+
+    insertControls()
+    bindEvents()
 }

@@ -6,23 +6,28 @@ const mountCanvas = () => {
 }
 
 const __main = () => {
-    let images = {
-        bg: 'img/bg_day.png',
-        ground: 'img/ground.png',
-        pipe: 'img/pipe.png',
-        bird_0: 'img/bird_s1.png',
-        bird_1: 'img/bird_s2.png',
-        bird_2: 'img/bird_s3.png',
-    }
-
     mountCanvas()
 
-    let game = GuaGame.instance(30, images, () => {
-        let s = SceneTitle.new(game)
-        game.replaceScene(s)
-    })
+    let debugEnabled = config.debugEnabled
 
-    enableDebugMode(game, true)
+    insertDebugControls(debugEnabled)
+
+    let game = GuaGame.instance({
+        debugEnabled,
+        fps: 30,
+        images: {
+            bg: 'img/bg_day.png',
+            ground: 'img/ground.png',
+            pipe: 'img/pipe.png',
+            bird_0: 'img/bird_s1.png',
+            bird_1: 'img/bird_s2.png',
+            bird_2: 'img/bird_s3.png',
+        },
+        callback: () => {
+            let s = SceneTitle.new(game)
+            game.replaceScene(s)
+        }
+    })
 
     game.start()
 }

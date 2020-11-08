@@ -1,22 +1,22 @@
 class Pipe extends New {
-    constructor(game) {
+    constructor(game, gap) {
         super()
         this.game = game
-        this.gap = 150
 
         this.pipe1 = GuaImage.new(game, 'pipe')
         this.pipe1.flipY = true
         this.pipe2 = GuaImage.new(game, 'pipe')
 
         this.w = this.pipe1.w
+        this.speed = 7
 
         let ry = randomInt(200, 510)
-        this.pipe1.y = ry - this.gap - this.pipe1.h
+        this.pipe1.y = ry - gap - this.pipe1.h
         this.pipe2.y = ry
     }
 
     update() {
-        this.x -= 7
+        this.x -= this.speed
         this.pipe1.x = this.x
         this.pipe2.x = this.x
     }
@@ -25,6 +25,10 @@ class Pipe extends New {
         this.pipe1.draw()
         this.pipe2.draw()
     }
+
+    debug() {
+        this.speed = configControl.pipe_speed.value
+    }
 }
 
 class Pipes extends New {
@@ -32,9 +36,10 @@ class Pipes extends New {
         super()
         this.game = game
         this.pipes = []
-        this.gap = 100
+        this.gap_horizontal = 200
+        this.gap_vertical = 150
 
-        let p = Pipe.new(game, 'pipe')
+        let p = Pipe.new(game, this.gap_vertical)
         p.x = 520
         this.pipes.push(p)
     }
@@ -46,12 +51,12 @@ class Pipes extends New {
         })
 
         // add pipe
-        let last = this.pipes[this.pipes.length - 1]
         let canvasW = 480
         let stageW = 40
-        let x = last.x + last.w + this.gap
+        let last = this.pipes[this.pipes.length - 1]
+        let x = last.x + last.w + this.gap_horizontal
         if (x < canvasW + stageW) {
-            let p = Pipe.new(this.game, 'pipe')
+            let p = Pipe.new(this.game, this.gap_vertical)
             p.x = x
             this.pipes.push(p)
         }
@@ -65,5 +70,11 @@ class Pipes extends New {
         for (let p of this.pipes) {
             p.draw()
         }
+    }
+
+    debug() {
+        this.gap_horizontal = configControl.pipe_gap_horizontal.value
+        this.gap_vertical = configControl.pipe_gap_vertical.value
+        this.pipes.forEach(p => p.debug())
     }
 }

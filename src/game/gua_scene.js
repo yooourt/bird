@@ -3,6 +3,7 @@ class GuaScene extends New {
         super()
         this.game = game
         this.elements = []
+        this.debugModeEnabled = config.debugEnabled
     }
 
     addElements(elements) {
@@ -29,6 +30,12 @@ class GuaScene extends New {
     }
 
     update() {
+        if (this.debugModeEnabled) {
+            for (let e of this.elements) {
+                e.debug && e.debug()
+            }
+        }
+
         for (let e of this.elements) {
             e.update()
         }
