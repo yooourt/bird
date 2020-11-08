@@ -14,10 +14,14 @@ const __main = () => {
     }
 
     mountCanvas()
+
     let game = GuaGame.instance(30, images, () => {
         let s = SceneTitle.new(game)
         game.replaceScene(s)
     })
+
+    enableDebugMode(game, true)
+
     game.start()
 }
 

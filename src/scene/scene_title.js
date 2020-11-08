@@ -13,7 +13,9 @@ class SceneTitle extends GuaScene {
             this.addElement(g)
         }
 
-        let a = GuaAnimation.new(this.game)
-        this.addElement(a)
+        let b = Bird.new(this.game)
+        b.x = 184
+        b.y = 200
+        this.addElement(b)
     }
 }

@@ -1,37 +1,38 @@
 class GuaAnimation extends New {
-    constructor(game) {
+    constructor(game, animations, initial) {
         super()
         this.game = game
-
         this.x = 0
         this.y = 0
-
+        this.frame = null
+        this.frameInterval = 3
+        this.frameCount = 0
         this.frameIndex = 0
-        this.animations = {}
+        this.animations = animations
         this.currentAnimation = []
 
-        let flys = []
-        for (let i = 0; i < 3; i += 1) {
-            let s = GuaImage.new(this.game, 'bird_' + i)
-            flys.push(s)
-        }
-        this.animations['flys'] = flys
-
-        this.changeAnimation('flys')
+        this.changeAnimation(initial)
     }
 
     changeAnimation(name) {
-        this.currentAnimation = this.animations[name]
         this.frameIndex = 0
+        this.frameCount = 0
+        this.currentAnimation = this.animations[name]
     }
 
     update() {
-        let i = this.frameIndex + 1
-        this.frameIndex = circleIndex(this.currentAnimation, i)
+        this.frame = this.currentAnimation[this.frameIndex]
+        this.frame.x = this.x
+        this.frame.y = this.y
+
+        this.frameCount += 1
+        if (this.frameCount > this.frameInterval) {
+            this.frameCount = 0
+            this.frameIndex = circleIndex(this.currentAnimation, this.frameIndex + 1)
+        }
     }
 
     draw() {
-        let img = this.currentAnimation[this.frameIndex]
-        img.draw()
+        this.frame.draw()
     }
 }
