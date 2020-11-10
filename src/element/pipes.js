@@ -27,7 +27,7 @@ class Pipe extends New {
     }
 
     debug() {
-        this.speed = configControl.pipe_speed.value
+        this.speed = config.control.pipe_speed.value
     }
 }
 
@@ -73,8 +73,8 @@ class Pipes extends New {
     }
 
     debug() {
-        this.gap_horizontal = configControl.pipe_gap_horizontal.value
-        this.gap_vertical = configControl.pipe_gap_vertical.value
+        this.gap_horizontal = config.control.pipe_gap_horizontal.value
+        this.gap_vertical = config.control.pipe_gap_vertical.value
         this.pipes.forEach(p => p.debug())
     }
 }

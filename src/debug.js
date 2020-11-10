@@ -24,7 +24,7 @@ const insertDebugControls = (enable) => {
                         min="${item.min}"
                         max="${item.max}"
                         value="${item.value}"
-                        data-value="configControl.${key}"
+                        data-value="config.control.${key}"
                     />
                     ${item._comment}:
                     <span class="gua-label">${item.value}</span>
@@ -36,9 +36,9 @@ const insertDebugControls = (enable) => {
 
     const insertControls = function() {
         let div = e('.gua-controls')
-        let keys = Object.keys(configControl)
+        let keys = Object.keys(config.control)
         for (let k of keys) {
-            let item = configControl[k]
+            let item = config.control[k]
             let html = templateControl(k, item)
             div.insertAdjacentHTML('beforeend', html)
         }

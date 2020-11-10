@@ -10,6 +10,7 @@ class GuaGame {
         let canvas = e('#game-canvas')
         let context = canvas.getContext('2d')
 
+        this.paused = false
         this.fps = fps
         this.imgs = images
         this.callback = callback
@@ -63,24 +64,23 @@ class GuaGame {
 
     runLoop() {
         const loop = () => {
-            if (window.paused) {
-                return
+            if (!this.paused) {
+                this.handleGameEvents()
+
+                this.scene.update()
+
+                this.clearCanvas()
+
+                this.scene.draw()
             }
-
-            this.handleGameEvents()
-
-            this.scene.update()
-
-            this.clearCanvas()
-
-            this.scene.draw()
 
             let fps
             if (this.debugEnabled) {
-                fps = configControl.fps.value
+                fps = config.control.fps.value
             } else {
                 fps = this.fps
             }
+
             setTimeout(loop, 1000 / fps)
         }
 
