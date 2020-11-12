@@ -10,6 +10,7 @@ class GuaAnimation extends New {
         this.frameIndex = 0
         this.animations = animations
         this.currentAnimation = []
+        this.animationPaused = false
 
         this.changeAnimation(initial)
     }
@@ -24,12 +25,20 @@ class GuaAnimation extends New {
         this.frame = this.currentAnimation[this.frameIndex]
         this.frame.x = this.x
         this.frame.y = this.y
+        this.w = this.frame.w
+        this.h = this.frame.h
 
-        this.frameCount += 1
-        if (this.frameCount > this.frameInterval) {
-            this.frameCount = 0
-            this.frameIndex = circleIndex(this.currentAnimation, this.frameIndex + 1)
+        if (!this.animationPaused) {
+            this.frameCount += 1
+            if (this.frameCount > this.frameInterval) {
+                this.frameCount = 0
+                this.frameIndex = circleIndex(this.currentAnimation, this.frameIndex + 1)
+            }
         }
+    }
+
+    stopAnimate() {
+        this.animationPaused = true
     }
 
     draw() {

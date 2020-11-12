@@ -19,6 +19,12 @@ class Pipe extends New {
         this.x -= this.speed
         this.pipe1.x = this.x
         this.pipe2.x = this.x
+
+        let bird = this.game.scene.bird
+        if (collided(bird, this.pipe1) ||
+            collided(bird, this.pipe2)) {
+            this.game.scene.gameOver()
+        }
     }
 
     draw() {
@@ -38,6 +44,7 @@ class Pipes extends New {
         this.pipes = []
         this.gap_horizontal = 200
         this.gap_vertical = 150
+        this.paused = false
 
         let p = Pipe.new(game, this.gap_vertical)
         p.x = 520
@@ -45,6 +52,10 @@ class Pipes extends New {
     }
 
     update() {
+        if (this.paused) {
+            return
+        }
+
         // remove pipe
         this.pipes = this.pipes.filter(p => {
             return p.x + p.w >= 0
@@ -70,6 +81,10 @@ class Pipes extends New {
         for (let p of this.pipes) {
             p.draw()
         }
+    }
+
+    stop() {
+        this.paused = true
     }
 
     debug() {

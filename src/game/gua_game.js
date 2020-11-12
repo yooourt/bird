@@ -55,6 +55,7 @@ class GuaGame {
 
     registerAction(key, callback) {
         this.actions[key] = callback
+        return () => this.actions[key] = null
     }
 
     clearCanvas() {

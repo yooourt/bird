@@ -47,8 +47,13 @@ class Bird extends GuaAnimation {
     }
 
     setupInputs() {
-        this.game.registerAction('j', () => {
+        this.removeActionJump = this.game.registerAction('j', () => {
             this.jump()
         })
+    }
+
+    fall() {
+        this.removeActionJump()
+        this.stopAnimate()
     }
 }
