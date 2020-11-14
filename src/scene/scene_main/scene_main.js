@@ -1,10 +1,10 @@
-class SceneTitle extends GuaScene {
-    constructor(game) {
+class SceneMain extends GuaScene {
+    constructor(game, config) {
         super(game)
-        this.initialize()
+        this.initialize(config)
     }
 
-    initialize() {
+    initialize(config) {
         let bg = GuaImage.new(this.game, 'bg')
         this.addElement(bg)
         this.background = bg
@@ -17,9 +17,9 @@ class SceneTitle extends GuaScene {
         this.addElement(g)
         this.ground = g
 
-        let b = Bird.new(this.game)
-        b.x = 184
-        b.y = 200
+        let b = BirdMain.new(this.game)
+        b.x = config.bird.x
+        b.y = config.bird.y
         this.addElement(b)
         this.bird = b
     }
