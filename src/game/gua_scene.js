@@ -3,6 +3,7 @@ class GuaScene extends New {
         super()
         this.game = game
         this.elements = []
+        this.callbacks = DefaultMap.new(() => [])
         this.debugModeEnabled = config.debugEnabled
     }
 
@@ -40,4 +41,18 @@ class GuaScene extends New {
             e.update()
         }
     }
+
+    trigger(event, data) {
+        this.callbacks.get(event).forEach((callback) => {
+            callback(data)
+        })
+    }
+
+    listen(event, callback) {
+        this.callbacks.get(event).push(callback)
+    }
+
+    // destroy() {
+    //     this.callbacks = DefaultMap.new(() => [])
+    // }
 }

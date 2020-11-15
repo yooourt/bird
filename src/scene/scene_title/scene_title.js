@@ -22,13 +22,17 @@ class SceneTitle extends GuaScene {
         e.x = 150
         e.y = 120
         this.addElement(e)
-        window.eeee = e
 
         let b = BirdFlying.new(this.game)
         b.x = 174
         b.y = 250
         this.addElement(b)
         this.bird = b
+
+        let hint = GuaImage.new(this.game, 'press_j')
+        hint.x = 30
+        hint.y = 350
+        this.addElement(hint)
     }
 
     setupInputs() {

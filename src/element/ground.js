@@ -30,7 +30,8 @@ class Ground extends New  {
         for (let t of this.tiles) {
             let bird = this.game.scene.bird
             if (collided(bird, t)) {
-                this.game.scene.gameOver()
+                // this.game.scene.gameOver()
+                this.game.scene.trigger('collided')
             }
         }
     }

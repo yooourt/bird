@@ -23,6 +23,8 @@ const __main = () => {
             bird_1: 'img/bird_s2.png',
             bird_2: 'img/bird_s3.png',
             get_ready: 'img/get_ready.png',
+            game_over: 'img/game_over.png',
+            press_j: 'img/press_j_to_start.png',
         },
         callback: () => {
             let s = SceneTitle.new(game)

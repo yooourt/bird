@@ -23,7 +23,8 @@ class Pipe extends New {
         let bird = this.game.scene.bird
         if (collided(bird, this.pipe1) ||
             collided(bird, this.pipe2)) {
-            this.game.scene.gameOver()
+            // this.game.scene.gameOver()
+            this.game.scene.trigger('collided')
         }
     }
 

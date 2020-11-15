@@ -22,11 +22,17 @@ class SceneMain extends GuaScene {
         b.y = config.bird.y
         this.addElement(b)
         this.bird = b
+
+        this.listen('collided', () => {
+            this.gameOver()
+        })
     }
 
     gameOver() {
         this.bird.fall()
         this.pipes.stop()
         this.ground.stop()
+        let s = SceneOver.new(this.game, this)
+        this.game.replaceScene(s)
     }
 }

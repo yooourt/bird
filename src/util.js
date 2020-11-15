@@ -92,3 +92,26 @@ class New {
         return new this(...args)
     }
 }
+
+class DefaultMap extends New {
+    constructor(defaultValue) {
+        super()
+        this.m = new Map()
+        this.d = defaultValue
+    }
+
+    set(key, value) {
+        this.m.set(key, value)
+    }
+
+    get(key) {
+        const value = this.m.get(key)
+
+        if (isNil(value)) {
+            this.set(key, this.d())
+            return this.get(key)
+        } else {
+            return value
+        }
+    }
+}
