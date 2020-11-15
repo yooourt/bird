@@ -65,6 +65,11 @@ class GuaGame {
 
     runLoop() {
         const loop = () => {
+            if (this.debugEnabled) {
+                this.fps = config.control.fps.value
+                this.paused = config.control.paused.value == 1
+            }
+
             if (!this.paused) {
                 this.handleGameEvents()
 
@@ -75,14 +80,7 @@ class GuaGame {
                 this.scene.draw()
             }
 
-            let fps
-            if (this.debugEnabled) {
-                fps = config.control.fps.value
-            } else {
-                fps = this.fps
-            }
-
-            setTimeout(loop, 1000 / fps)
+            setTimeout(loop, 1000 / this.fps)
         }
 
         loop()

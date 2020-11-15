@@ -17,6 +17,12 @@ class SceneMain extends GuaScene {
         this.addElement(g)
         this.ground = g
 
+        let score = Score.new(this.game)
+        score.x = 250
+        score.y = 50
+        this.addElement(score)
+        this.score = score
+
         let b = BirdMain.new(this.game)
         b.x = config.bird.x
         b.y = config.bird.y
@@ -26,6 +32,21 @@ class SceneMain extends GuaScene {
         this.listen('collided', () => {
             this.gameOver()
         })
+
+        this.listen('score', () => {
+            this.score.add1()
+        })
+    }
+
+    debug() {
+        if (isNil(this.debug.gameOver)) {
+            this.debug.gameOver = this.gameOver
+        }
+        if (config.control.invincible.value == 1) {
+            this.gameOver = function() { }
+        } else {
+            this.gameOver = this.debug.gameOver
+        }
     }
 
     gameOver() {

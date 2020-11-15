@@ -1,6 +1,12 @@
 const config = {
   debugEnabled: true,
   control: {
+    paused: {
+      _comment : 'paused',
+      value : 0,
+      min : 0,
+      max : 1,
+    },
     fps: {
       _comment : 'fps',
       value : 30,
@@ -24,6 +30,18 @@ const config = {
       value : 5,
       min : 0,
       max : 10,
+    },
+    score: {
+      _comment : 'score',
+      value : 0,
+      min : 0,
+      max : 9999,
+    },
+    invincible: {
+      _comment : 'invincible',
+      value : 0,
+      min : 0,
+      max : 1,
     },
   }
 }

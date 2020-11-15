@@ -13,6 +13,14 @@ class Pipe extends New {
         let ry = randomInt(200, 510)
         this.pipe1.y = ry - gap - this.pipe1.h
         this.pipe2.y = ry
+
+        this.scoreLine = {
+            w: 1,
+            h: 560,
+            x: 0,
+            y: 0,
+            hit: false,
+        }
     }
 
     update() {
@@ -25,6 +33,12 @@ class Pipe extends New {
             collided(bird, this.pipe2)) {
             // this.game.scene.gameOver()
             this.game.scene.trigger('collided')
+        }
+
+        this.scoreLine.x = this.x + this.w / 2
+        if (collided(bird, this.scoreLine) && !this.scoreLine.hit) {
+            this.scoreLine.hit = true
+            this.game.scene.trigger('score')
         }
     }
 
@@ -43,11 +57,11 @@ class Pipes extends New {
         super()
         this.game = game
         this.pipes = []
-        this.gap_horizontal = 200
-        this.gap_vertical = 150
+        this.gapHorizontal = 200
+        this.gapVertical = 150
         this.paused = false
 
-        let p = Pipe.new(game, this.gap_vertical)
+        let p = Pipe.new(game, this.gapVertical)
         p.x = 520
         this.pipes.push(p)
     }
@@ -66,9 +80,9 @@ class Pipes extends New {
         let canvasW = 480
         let stageW = 40
         let last = this.pipes[this.pipes.length - 1]
-        let x = last.x + last.w + this.gap_horizontal
+        let x = last.x + last.w + this.gapHorizontal
         if (x < canvasW + stageW) {
-            let p = Pipe.new(this.game, this.gap_vertical)
+            let p = Pipe.new(this.game, this.gapVertical)
             p.x = x
             this.pipes.push(p)
         }
@@ -89,8 +103,8 @@ class Pipes extends New {
     }
 
     debug() {
-        this.gap_horizontal = config.control.pipe_gap_horizontal.value
-        this.gap_vertical = config.control.pipe_gap_vertical.value
+        this.gapHorizontal = config.control.pipe_gap_horizontal.value
+        this.gapVertical = config.control.pipe_gap_vertical.value
         this.pipes.forEach(p => p.debug())
     }
 }

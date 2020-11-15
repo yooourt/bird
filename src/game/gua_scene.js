@@ -35,6 +35,7 @@ class GuaScene extends New {
             for (let e of this.elements) {
                 e.debug && e.debug()
             }
+            this.debug && this.debug()
         }
 
         for (let e of this.elements) {

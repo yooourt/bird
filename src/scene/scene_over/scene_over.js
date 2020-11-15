@@ -22,6 +22,9 @@ class SceneOver extends GuaScene {
         e.y = 120
         this.addElement(e)
 
+        this.addElement(option.score)
+        this.score = option.score
+
         setTimeout(() => {
             let hint = GuaImage.new(this.game, 'press_j')
             hint.x = 30
